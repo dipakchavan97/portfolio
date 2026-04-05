@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dipak Chavan | DevOps Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-outline" id="cursor-outline"></div>
+<div id="particles-js"></div>
+
+<nav>
+    <div class="logo">DIPAK.CHAVAN</div>
+    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+    <ul class="nav-menu" id="navMenu">
+        <li onclick="showSection('home', this)" class="active-link">Home</li>
+        <li onclick="showSection('terminal', this)">Terminal</li>
+        <li onclick="showSection('dashboard', this)">Metrics</li> 
+        <li onclick="showSection('skills', this)">Skills</li>
+        <li onclick="showSection('experience', this)">Experience</li>
+        <li onclick="showSection('certs', this)">Certs</li>
+        <li onclick="showSection('projects', this)">Projects</li>
+        <li onclick="showSection('incidents', this)">Ops</li> 
+        <li onclick="showSection('toolbox', this)">Code</li> 
+        <li onclick="showSection('activity', this)">Activity</li>
+        <li onclick="showSection('contact', this)">Contact</li>
+    </ul>
+</nav>
+
+<div id="home" class="section active">
+    <div class="hero">
+        <h1>Dipak Chavan</h1>
+        <div id="typing" class="typing-container"></div>
+        <p class="hero-sub">DevOps Engineer | Mumbai, India</p>
+        
+        <button class="contact-btn" style="margin: 25px auto 0; display: inline-flex; width: auto; font-size: 0.95rem; box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);" onclick="startPipeline()">
+            <i class="fas fa-rocket"></i> Trigger Build (Resume.pdf)
+        </button>
+    </div>
+
+    <div class="grid">
+        <div class="card" style="text-align: center;">
+            <h2 style="color: var(--primary); font-size: 2.5rem; text-shadow: 0 0 15px var(--primary-glow);">40%</h2>
+            <p>Reduction in Deployment Time</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h2 style="color: var(--accent-green); font-size: 2.5rem; text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);">15%</h2>
+            <p>Cloud Cost Optimization</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h2 style="color: var(--secondary); font-size: 2.5rem; text-shadow: 0 0 15px var(--secondary-glow);">30%</h2>
+            <p>Improved Code Reliability</p>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 30px;">
+        <h3><i class="fas fa-user-tie"></i> Professional Summary</h3>
+        <p>Results-driven DevOps Engineer with 4+ years of experience in automating, optimizing, and managing cloud-native infrastructure on AWS. Specialized in Kubernetes (EKS), Terraform, and CI/CD pipeline engineering. Adept at bridging development and operations to enable faster and more reliable software delivery.</p>
+    </div>
+</div>
+
+<div id="terminal" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-terminal"></i> Interactive Shell</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem;">Type `help` to see available commands or try `ls`.</p>
+    
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="t-btn t-red"></div>
+            <div class="t-btn t-yellow"></div>
+            <div class="t-btn t-green"></div>
+        </div>
+        <div class="terminal-body" id="terminal-body">
+            <div class="t-input-line">
+                <span class="t-prompt">dipak-shell:~$</span>
+                <input type="text" id="terminal-input" autofocus>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dashboard" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-chart-line"></i> Production Telemetry</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Live mock representation of system health and EKS cluster metrics.</p>
+
+    <div class="grafana-grid">
+        <div class="grafana-panel">
+            <div class="grafana-status"></div>
+            <div class="grafana-title">Global Uptime</div>
+            <div class="grafana-value">99.99<span class="grafana-unit">%</span></div>
+            <p style="font-size: 0.75rem; color: var(--accent-green); margin-top: 5px;"><i class="fas fa-arrow-up"></i> All Systems Operational</p>
+        </div>
+        <div class="grafana-panel">
+            <div class="grafana-title">EKS Cluster CPU Util</div>
+            <div class="grafana-value" id="cpu-val">42<span class="grafana-unit">%</span></div>
+            <div class="grafana-chart" id="cpu-chart">
+            </div>
+        </div>
+        <div class="grafana-panel">
+            <div class="grafana-title">Active Pods (Prod)</div>
+            <div class="grafana-value" id="pod-val">128</div>
+            <div class="grafana-chart" id="pod-chart">
+            </div>
+        </div>
+        <div class="grafana-panel">
+            <div class="grafana-title">P99 Latency</div>
+            <div class="grafana-value">124<span class="grafana-unit">ms</span></div>
+            <p style="font-size: 0.75rem; color: #8e8f93; margin-top: 5px;">Target: < 200ms</p>
+        </div>
+    </div>
+</div>
+
+<div id="skills" class="section">
+    <h2 style="margin-bottom: 30px;"><i class="fas fa-tools"></i> Technical Toolset</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Skill Proficiency</h3>
+            <div class="skill-item">
+                <div class="skill-info"><span>AWS Cloud</span><span style="color: #FF9900;">90%</span></div>
+                <div class="bar-wrap"><div class="bar-fill fill-aws" data-width="90%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>Kubernetes (EKS)</span><span style="color: #326CE5;">85%</span></div>
+                <div class="bar-wrap"><div class="bar-fill fill-k8s" data-width="85%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>Terraform (IaC)</span><span style="color: #AC81E1;">88%</span></div>
+                <div class="bar-wrap"><div class="bar-fill fill-tf" data-width="88%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>Jenkins CI/CD</span><span style="color: #F07C6F;">92%</span></div>
+                <div class="bar-wrap"><div class="bar-fill fill-jenkins" data-width="92%"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info"><span>Docker</span><span style="color: #2496ED;">90%</span></div>
+                <div class="bar-wrap"><div class="bar-fill fill-docker" data-width="90%"></div></div>
+            </div>
+        </div>
+
+        <div>
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>Cloud Platforms</h3>
+                <div class="tag-cloud">
+                    <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">VPC</span>
+                    <span class="tag">IAM</span><span class="tag">Route 53</span><span class="tag">CloudWatch</span>
+                    <span class="tag">SNS</span><span class="tag">SQS</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>DevOps & Automation</h3>
+                <div class="tag-cloud">
+                    <span class="tag">Helm</span><span class="tag">Maven</span><span class="tag">SonarQube</span>
+                    <span class="tag">Git/GitHub</span><span class="tag">Prometheus</span><span class="tag">Grafana</span>
+                    <span class="tag">Linux (Ubuntu/CentOS)</span><span class="tag">Bash Scripting</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="experience" class="section">
+    <h2 style="margin-bottom: 30px;"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+    
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 10px;">
+            <h3 style="margin: 0;">Deegee Software Pvt. Ltd.</h3>
+            <span style="color: var(--primary); font-weight: 600; text-shadow: 0 0 8px var(--primary-glow);">2020 – Present</span>
+        </div>
+        <p style="color: var(--text-dim); margin-bottom: 20px;">DevOps Engineer | Mumbai, India</p>
+
+        <div class="grid" style="margin-top: 0; gap: 15px;">
+            <div>
+                <h4 style="color: var(--secondary); margin-bottom: 10px;">Containerization & Orchestration</h4>
+                <ul class="resume-list">
+                    <li>Containerized 20+ microservices using Docker and deployed on Kubernetes (EKS).</li>
+                    <li>Implemented Helm charts and Kubernetes manifests to standardize deployments.</li>
+                    <li>Reduced server resource overhead by 25% through optimized pod scaling.</li>
+                </ul>
+
+                <h4 style="color: var(--secondary); margin-top: 20px; margin-bottom: 10px;">Infrastructure as Code (IaC)</h4>
+                <ul class="resume-list">
+                    <li>Provisioned multi-environment AWS infrastructure using reusable Terraform modules.</li>
+                    <li>Implemented remote state management using S3 backend with locking.</li>
+                    <li>Achieved 100% environment consistency, reducing manual effort by 60%.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 style="color: var(--secondary); margin-bottom: 10px;">CI/CD & Monitoring</h4>
+                <ul class="resume-list">
+                    <li>Designed Jenkins declarative pipelines for build, test, and deploy stages.</li>
+                    <li>Increased deployment frequency from weekly to daily production releases.</li>
+                    <li>Integrated SonarQube for code analysis, improving reliability by 30%.</li>
+                    <li>Deployed Prometheus & Grafana for Kubernetes cluster monitoring.</li>
+                </ul>
+
+                <h4 style="color: var(--secondary); margin-top: 20px; margin-bottom: 10px;">Network & Security</h4>
+                <ul class="resume-list">
+                    <li>Designed secure VPC architectures with public/private subnets and NAT Gateways.</li>
+                    <li>Managed IAM roles and Kubernetes RBAC with least-privilege principles.</li>
+                    <li>Optimized storage usage, reducing AWS monthly expenses by 15%.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="certs" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-certificate"></i> Certifications & Badges</h2>
+    
+    <div class="cert-grid">
+        <div class="cert-card">
+            <i class="fab fa-aws cert-icon" style="color: #FF9900;"></i>
+            <h3>AWS Certified Solutions Architect – Associate</h3>
+            <span class="cert-status">Active</span>
+        </div>
+        <div class="cert-card">
+            <i class="fas fa-dharmachakra cert-icon" style="color: #326CE5;"></i>
+            <h3>Certified Kubernetes Administrator (CKA)</h3>
+            <span class="cert-status">Active</span>
+        </div>
+        <div class="cert-card">
+            <i class="fas fa-cloud cert-icon" style="color: #AC81E1;"></i>
+            <h3>HashiCorp Certified: Terraform Associate</h3>
+            <span class="cert-status">Active</span>
+        </div>
+    </div>
+</div>
+
+<div id="projects" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-project-diagram"></i> Key DevOps Projects</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Click a project card to view architecture diagrams and details.</p>
+    
+    <div class="grid">
+        <div class="card project-card" onclick="openModal('gitops-modal')">
+            <h3>GitOps All-in-One Pipeline</h3>
+            <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px;">End-to-End Automation</p>
+            <ul class="resume-list">
+                <li>Built a complete CI/CD workflow using **Jenkins, Docker, and K3d**.</li>
+                <li>Implemented **Helm** for application packaging and **ArgoCD** for declarative GitOps deployments.</li>
+                <li>Ensured high availability and automated sync between GitHub and K8s clusters.</li>
+            </ul>
+            <div class="tag-cloud" style="margin-top: 15px;">
+                <span class="tag">ArgoCD</span><span class="tag">K3d</span><span class="tag">Helm</span><span class="tag">GitOps</span>
+            </div>
+        </div>
+
+        <div class="card project-card" onclick="openModal('eks-modal')">
+            <h3>Enterprise EKS Migration</h3>
+            <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px;">Scalability & Efficiency</p>
+            <ul class="resume-list">
+                <li>Migrated 20+ legacy microservices to **Amazon EKS** clusters.</li>
+                <li>Optimized resource utilization by 25% using **HPA (Horizontal Pod Autoscalers)**.</li>
+                <li>Standardized environment creation across Dev, QA, and Prod.</li>
+            </ul>
+            <div class="tag-cloud" style="margin-top: 15px;">
+                <span class="tag">AWS EKS</span><span class="tag">HPA</span><span class="tag">Microservices</span>
+            </div>
+        </div>
+
+        <div class="card project-card" onclick="openModal('iac-modal')">
+            <h3>IaC Infrastructure Suite</h3>
+            <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px;">Automation & Consistency</p>
+            <ul class="resume-list">
+                <li>Developed reusable **Terraform Modules** for VPC, EC2, and S3 provisioning.</li>
+                <li>Implemented **S3 Backend with DynamoDB locking** to prevent state corruption.</li>
+                <li>Reduced cloud provisioning time from hours to minutes.</li>
+            </ul>
+            <div class="tag-cloud" style="margin-top: 15px;">
+                <span class="tag">Terraform</span><span class="tag">S3 Backend</span><span class="tag">IaC</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="incidents" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-fire-extinguisher"></i> Incident Response Playbook</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 30px;">How I approach and resolve high-severity production issues.</p>
+    
+    <div class="incident-card">
+        <div class="incident-header">
+            <i class="fas fa-exclamation-triangle"></i> ALERT: High CPU Spikes on Prod EKS Cluster causing API Latency
+        </div>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Simulate my debugging process below.</p>
+        
+        <button class="incident-btn" id="inc-btn-1" onclick="revealIncidentStep(1)">1. Initial Triage <i class="fas fa-chevron-down"></i></button>
+        <div class="incident-step" id="inc-step-1">
+            <p><strong><span style="color: var(--primary);">Action:</span></strong> Check CloudWatch Alarms and Grafana Dashboards.</p>
+            <p><strong><span style="color: var(--accent-green);">Finding:</span></strong> CPU on node group `worker-nodes-a` is at 95%. Specific pods for the `payment-service` are maxing out their limits.</p>
+        </div>
+
+        <button class="incident-btn" id="inc-btn-2" onclick="revealIncidentStep(2)" style="display: none;">2. Investigate & Contain <i class="fas fa-chevron-down"></i></button>
+        <div class="incident-step" id="inc-step-2">
+            <p><strong><span style="color: var(--primary);">Action:</span></strong> Run `kubectl logs` and `kubectl top pods` for the affected service. Temporarily scale up HPA `maxReplicas` to absorb traffic.</p>
+            <p><strong><span style="color: var(--accent-green);">Finding:</span></strong> Logs reveal a runaway process loop in the latest deployment. Scaling HPA stabilizes API latency temporarily.</p>
+        </div>
+
+        <button class="incident-btn" id="inc-btn-3" onclick="revealIncidentStep(3)" style="display: none;">3. Resolve & Post-Mortem <i class="fas fa-chevron-down"></i></button>
+        <div class="incident-step" id="inc-step-3">
+            <p><strong><span style="color: var(--primary);">Action:</span></strong> Initiate an immediate ArgoCD rollback to the previous stable Helm chart version. Coordinate with dev team to patch the loop.</p>
+            <p><strong><span style="color: var(--accent-green);">Result:</span></strong> System restored to 100% health in < 15 mins. Post-mortem document created to implement stricter SonarQube rules for loop complexity.</p>
+            <div style="margin-top: 15px; color: var(--accent-green); font-weight: bold;"><i class="fas fa-check-circle"></i> Incident Resolved</div>
+        </div>
+    </div>
+</div>
+
+<div id="toolbox" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fas fa-code"></i> Code Snippet Toolbox</h2>
+    <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px;">Actual configurations demonstrating syntax and best practices.</p>
+
+    <div class="code-grid">
+        <div class="code-block-container">
+            <div class="code-header">
+                <span class="file-name">main.tf (VPC Module)</span>
+                <button class="copy-btn"><i class="far fa-copy"></i></button>
+            </div>
+            <div class="code-content">
+<span class="s-keyword">module</span> <span class="s-string">"vpc"</span> {
+  <span class="s-func">source</span>  = <span class="s-string">"terraform-aws-modules/vpc/aws"</span>
+  <span class="s-func">version</span> = <span class="s-string">"5.0.0"</span>
+
+  <span class="s-func">name</span> = <span class="s-string">"production-vpc"</span>
+  <span class="s-func">cidr</span> = <span class="s-string">"10.0.0.0/16"</span>
+
+  <span class="s-func">azs</span>             = [<span class="s-string">"ap-south-1a"</span>, <span class="s-string">"ap-south-1b"</span>]
+  <span class="s-func">private_subnets</span> = [<span class="s-string">"10.0.1.0/24"</span>, <span class="s-string">"10.0.2.0/24"</span>]
+  <span class="s-func">public_subnets</span>  = [<span class="s-string">"10.0.101.0/24"</span>, <span class="s-string">"10.0.102.0/24"</span>]
+
+  <span class="s-func">enable_nat_gateway</span> = <span class="s-keyword">true</span>
+  <span class="s-func">single_nat_gateway</span> = <span class="s-keyword">false</span> <span class="s-comment"># High Availability</span>
+
+  <span class="s-func">tags</span> = {
+    <span class="s-func">Environment</span> = <span class="s-string">"prod"</span>
+    <span class="s-func">ManagedBy</span>   = <span class="s-string">"terraform"</span>
+  }
+}
+            </div>
+        </div>
+
+        <div class="code-block-container">
+            <div class="code-header">
+                <span class="file-name">Jenkinsfile</span>
+                <button class="copy-btn"><i class="far fa-copy"></i></button>
+            </div>
+            <div class="code-content">
+<span class="s-keyword">pipeline</span> {
+    <span class="s-func">agent</span> any
+    <span class="s-keyword">stages</span> {
+        <span class="s-keyword">stage</span>(<span class="s-string">'Lint & Test'</span>) {
+            <span class="s-keyword">steps</span> {
+                <span class="s-func">sh</span> <span class="s-string">'mvn clean test'</span>
+            }
+        }
+        <span class="s-keyword">stage</span>(<span class="s-string">'Docker Build & Push'</span>) {
+            <span class="s-keyword">steps</span> {
+                <span class="s-func">script</span> {
+                    <span class="s-func">docker</span>.withRegistry(<span class="s-string">'https://index.docker.io/v1/'</span>, <span class="s-string">'docker-creds'</span>) {
+                        <span class="s-keyword">def</span> app = <span class="s-func">docker</span>.build(<span class="s-string">"dipak/app:${env.BUILD_ID}"</span>)
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="activity" class="section">
+    <h2 style="margin-bottom: 10px;"><i class="fab fa-github"></i> GitHub Contribution Activity</h2>
+    
+    <div class="github-activity-card card">
+        <h3 style="margin-bottom: 15px;">Live Statistics</h3>
+        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 15px; text-align: center; margin-top: 0;">
+            <div>
+                <p style="color: var(--primary); font-size: 2rem; font-weight: 700;">320+</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Commits (2024)</p>
+            </div>
+            <div>
+                <p style="color: var(--secondary); font-size: 2rem; font-weight: 700;">18</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Public Repos</p>
+            </div>
+            <div>
+                <p style="color: var(--accent-green); font-size: 2rem; font-weight: 700;">5+</p>
+                <p style="font-size: 0.8rem; color: var(--text-dim);">Top Contributions</p>
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 30px; margin-bottom: 15px;">Top Repositories</h3>
+        <ul class="repo-list" id="repo-list">
+             <li class="t-output">Loading top repositories...</li>
+        </ul>
+    </div>
+</div>
+
+<div id="contact" class="section">
+    <h2 style="text-align: center; margin-bottom: 40px;">Connect With Me</h2>
+    
+    <div class="contact-grid">
+        <a href="https://linkedin.com/in/dipakchavan97" target="_blank" class="contact-btn">
+            <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i> LinkedIn
+        </a>
+        <a href="https://github.com/dipakchavan97" target="_blank" class="contact-btn">
+            <i class="fab fa-github" style="font-size: 1.5rem;"></i> GitHub
+        </a>
+        <a href="mailto:chavandipak876@gmail.com" class="contact-btn">
+            <i class="fas fa-envelope" style="font-size: 1.5rem;"></i> Email
+        </a>
+    </div>
+
+    <div class="card" style="max-width: 500px; margin: 30px auto; text-align: center;">
+        <p style="color: var(--text-dim);">Phone</p>
+        <h3 style="justify-content: center; color: white;">+91 9730787694</h3>
+        <p style="color: var(--text-dim); margin-top: 15px;">Location</p>
+        <p>Mumbai, India</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="gitops-modal">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal('gitops-modal')"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <h3>GitOps All-in-One Pipeline</h3>
+            <p style="text-align: center; color: #8b949e; border: 2px dashed #30363d; padding: 40px; border-radius: 10px; margin-bottom: 20px;">[ Git Commit -> Jenkins -> Docker Build -> SonarQube -> Image Push -> ArgoCD Sync -> K8s ]</p>
+            <ul class="resume-list" style="margin-bottom: 0;">
+                <li>**CI/CD Engine:** Managed Jenkins Master-Worker setup.</li>
+                <li>**Image Scan:** SonarQube quality checks before artifact storage.</li>
+                <li>**Deploy Strategy:** Recreate/Rolling-update based on environment.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="eks-modal">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal('eks-modal')"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <h3>Enterprise EKS Migration</h3>
+            <p style="text-align: center; color: #8b949e; border: 2px dashed #30363d; padding: 40px; border-radius: 10px; margin-bottom: 20px;">[ VPC Peering -> IAM Roles -> EKS Clusters -> HPA Setup -> ALB Ingress -> CloudWatch ]</p>
+            <ul class="resume-list" style="margin-bottom: 0;">
+                <li>**Autoscaling:** Configured Cluster Autoscaler and HPA based on CPU/Memory metrics.</li>
+                <li>**Security:** Hardened cluster endpoints, IAM OIDC for Service Accounts.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="iac-modal">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal('iac-modal')"><i class="fas fa-times"></i></button>
+        <div class="modal-body">
+            <h3>IaC Infrastructure Suite</h3>
+            <p style="text-align: center; color: #8b949e; border: 2px dashed #30363d; padding: 40px; border-radius: 10px; margin-bottom: 20px;">[ Git Commit -> Terraform Plan -> Remote State Lock (DynamoDB) -> S3 State Backend -> AWS ]</p>
+            <ul class="resume-list" style="margin-bottom: 0;">
+                <li>**Module Design:** Encapsulated VPC, EC2, RDS configuration for reuse.</li>
+                <li>**State Management:** Secure backend with encryption and DynamoDB locking.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="jenkins-modal">
+    <div class="modal-content" style="max-width: 900px; text-align: center;">
+        <button class="modal-close-btn" onclick="closeModal('jenkins-modal')" style="right: 15px; top: 10px;"><i class="fas fa-times"></i></button>
+        <h3 style="color: #fff; margin-bottom: 10px; font-weight: 500;"><i class="fab fa-jenkins"></i> Pipeline: <span style="color: var(--primary);">Deploy_Resume_PDF</span></h3>
+        <p style="color: var(--text-dim); font-family: 'Fira Code', monospace; font-size: 0.8rem; margin-bottom: 30px;">Build #402 • Started by user Recruiter</p>
+        
+        <div class="jenkins-pipeline">
+            <div class="jenkins-line"></div>
+            <div class="jenkins-line-fill" id="j-fill"></div>
+            
+            <div class="jenkins-stage">
+                <div class="j-circle" id="j-step-1"><i class="fas fa-code-branch"></i></div>
+                <span class="j-label">Checkout SCM</span>
+            </div>
+            <div class="jenkins-stage">
+                <div class="j-circle" id="j-step-2"><i class="fas fa-search"></i></div>
+                <span class="j-label">SonarQube Scan</span>
+            </div>
+            <div class="jenkins-stage">
+                <div class="j-circle" id="j-step-3"><i class="fas fa-file-pdf"></i></div>
+                <span class="j-label">Compile PDF</span>
+            </div>
+            <div class="jenkins-stage">
+                <div class="j-circle" id="j-step-4"><i class="fas fa-cloud-upload-alt"></i></div>
+                <span class="j-label">Deploy to S3</span>
+            </div>
+        </div>
+        
+        <div id="j-logs" style="margin-top: 40px; background: #010409; padding: 15px; border-radius: 8px; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #8b949e; text-align: left; height: 100px; overflow-y: hidden;">
+            [INFO] Initializing pipeline execution...
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
