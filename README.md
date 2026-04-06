@@ -27,8 +27,6 @@ The infrastructure is provisioned 100% via Terraform and utilizes the following 
 │   └── workflows/
 │       └── deploy.yml       # GitHub Actions CI/CD pipeline
 ├── index.html               # Main portfolio layout
-├── style.css                # Custom styling and animations
-├── main.js                  # Interactive logic and GitHub API fetching
 ├── resume.pdf               # Downloadable resume
 ├── main.tf                  # Terraform configuration for AWS resources
 ├── variables.tf             # Terraform variables (Domain, Bucket Name, Region)
